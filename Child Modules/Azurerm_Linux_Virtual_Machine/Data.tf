@@ -12,8 +12,8 @@ data "azurerm_resource_group" "rg" {
   name = each.value.resource_group_name
 }
 data "azurerm_public_ip" "PIP" {
-  for_each = { for k, v in var.Vms : k => v if try(v.public_ip_name, null) != null }
-  name = each.value.public_ip_name
+  for_each            = { for k, v in var.Vms : k => v if try(v.public_ip_name, null) != null }
+  name                = each.value.public_ip_name
   resource_group_name = each.value.resource_group_name
-  
+
 }
