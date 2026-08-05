@@ -1,0 +1,55 @@
+name: Terraform CI
+
+
+on: 
+  push:
+    branches:
+      - "feature/**"
+
+jobs:
+  
+  terraform-check:
+    runs-on: ubuntu-latest
+
+    env: 
+     TF_WORKING_DIR: Environments/PREPROD
+    
+    steps:
+
+     - name: checkout code
+       uses: actions/checkout@v4
+
+      
+     - name: Terraform setup
+       uses: hashicorp/setup-terraform@v3
+       with:
+          terraform_version: 1.15.8
+
+
+     - name: Terraform version check
+       run: terraform version
+
+
+     - name: Terraform format check
+       working-directory: ${{ env.TF_WORKING_DIR }}
+       run: terraform fmt -check -recursive
+       
+       
+     - name: Terraform init
+       working-directory: ${{ env.TF_WORKING_DIR }}
+       run:  terraform init
+
+      
+     - name: Terraform validate
+       working-directory: ${{ env.TF_WORKING_DIR }}
+       run: terraform validate 
+
+     - name: Install Tflint
+       run: |
+        curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+
+
+     - name: Run TFlint
+       working-directory: ${{ env.TF_WORKING_DIR }}
+       run: tflint --recursive
+       
