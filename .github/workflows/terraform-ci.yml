@@ -1,10 +1,10 @@
 name: Terraform CI
 
-
 on: 
   push:
     branches:
       - "feature/**"
+    
 
 jobs:
   
@@ -52,4 +52,12 @@ jobs:
      - name: Run TFlint
        working-directory: ${{ env.TF_WORKING_DIR }}
        run: tflint --recursive
+
+
+     - name: Install TFsec
+       run: |
+        curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
        
+
+     - name: Run TFsec
+       run: tfsec .   
