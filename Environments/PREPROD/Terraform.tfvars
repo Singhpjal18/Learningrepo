@@ -1,7 +1,7 @@
 RGs = {
 
   Rg1 = {
-    name     = "WorkspaceRG"
+    resource_group_name  = "WorkspaceRG"
     location = "East US"
 
   }
