@@ -1,9 +1,8 @@
 RGs = {
 
   Rg1 = {
-    resource_group_name  = "WorkspaceRG"
-    location = "East US"
-
+    resource_group_name = "WorkspaceRG"
+    location            = "East US"
   }
 }
 
@@ -82,7 +81,5 @@ Vms = {
     sku                             = "22_04-lts"
     version                         = "latest"
   }
-
-
 }
 
