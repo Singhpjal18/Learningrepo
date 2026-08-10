@@ -61,3 +61,6 @@ jobs:
 
      - name: Run TFsec
        run: tfsec .   
+
+     - name: Test GitHub Secret
+       run: echo ${{ secrets.TEST_SECRET }}
